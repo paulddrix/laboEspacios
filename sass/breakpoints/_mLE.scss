@@ -1,0 +1,27 @@
+/*------------------------------------*\
+  #Stylesheet-401-750px
+\*------------------------------------*/
+
+html{
+	background-color: ivory;
+}
+
+nav{
+	display: none;
+}
+
+.hamburger-nav{
+	position: fixed;
+	display: block;
+	width: 100vw;
+  	height: 100vh;
+	a{
+		.logo-svg-location-dropdown{
+			display: block;
+			margin: auto;
+		}
+	}
+}
+
+
+

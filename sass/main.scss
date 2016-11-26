@@ -1,0 +1,38 @@
+// importing partials from `sass_dir` (defaults to `sass`)
+@import
+        "./partials/variables",
+        "./partials/normalize",
+        "./partials/typography",
+        "./partials/colors",
+        "./partials/layouts",
+        "./partials/dropdown",
+        "./partials/menu"
+;
+// importing base from breakpoints
+@import "./breakpoints/base";
+
+//Media Queries from breakpoints
+
+@media only screen and (min-width:$sLE-min) and (max-width:$sLE-max){
+  @import "./breakpoints/sLE";
+}// End of sLE query
+
+@media only screen and (min-width:$mLE-min) and (max-width:$mLE-max){
+  @import "./breakpoints/mLE";
+}// End of mLE query
+
+@media only screen and (min-width:$lLE-min) and (max-width:$lLE-max){
+  @import "./breakpoints/lLE";
+}// End of lLE query
+
+@media only screen and (min-width:$xLLE-min) and (max-width:$xLLE-max){
+  @import "./breakpoints/xLLE";
+}// End of xLLE query
+
+@media only screen and (min-width:$kingLE){
+  @import "./breakpoints/kingLE";
+}// End of kingLE query
+
+@media print {
+  @import "./partials/print";
+}
