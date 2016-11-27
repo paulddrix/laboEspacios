@@ -3,7 +3,7 @@ module.exports = (app, privateKey, publicKey) => {
   const jwt = require('jsonwebtoken');
   const userAccount = require('../models/account');
   app.get('/', (req, res) =>{
-    const dataForView = {title:'Inicio', layout:'main'};
+    const dataForView = {title:'Inicio', layout:'main', message: req.flash()};
     res.render('home',dataForView);
   });
   // Check cookie function
@@ -67,7 +67,7 @@ module.exports = (app, privateKey, publicKey) => {
           const newUser = {
             companyName:req.body.companyName,
             email: req.body.email,
-            confirmed: false,
+            confirmed: true,
             employer:true,
             password: encryptedPassword,
             userId: Math.floor((Math.random() * 99999999) + 10000000),

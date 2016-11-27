@@ -915,8 +915,7 @@ Stylesheet: Base Stylesheet
 /*------------------------------------*  #GENERAL-STYLES
 \*------------------------------------*/
 html, body {
-  height: 100%;
-  background-color: green; }
+  height: 100%; }
 
 body {
   font-family: "azo-sans-web", sans-serif;
@@ -927,6 +926,15 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: 'Verdana', Geneva, san-serif;
   font-weight: initial; }
+
+.message {
+  color: blue; }
+
+.success {
+  color: green; }
+
+.error {
+  color: red; }
 
 @media only screen and (min-width: 100px) and (max-width: 400px) {
   /*------------------------------------*  #Stylesheet-320px-400px
