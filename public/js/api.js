@@ -29,15 +29,20 @@ var Api = (function() {
   function sendRequest(text, context) {
     // Build request payload
     var payloadToWatson = {};
+    console.log('outgoing user input');
+    console.log(text);
     if (text) {
+      if (text == "acepto") {
+        window.location = "/candidate/questions";
+      }
       payloadToWatson.input = {
         text: text
       };
     }
+
     if (context) {
       payloadToWatson.context = context;
     }
-
     // Built http request
     var http = new XMLHttpRequest();
     http.open('POST', messageEndpoint, true);

@@ -1,4 +1,7 @@
 module.exports = (app, watson) => {
+  const handyUtils = require('handyutils');
+  const multer  = require('multer');
+  const upload = multer({ dest: 'uploads/' });
   var conversation = watson.conversation({
      version: 'v1',
      version_date: '2016-09-20',
@@ -20,7 +23,7 @@ module.exports = (app, watson) => {
     const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
     res.render('candidateChatBody', data);
   });
-  // start questions 
+  // start questions
   app.get('/candidate/questions', (req, res)=>{
     const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
     res.render('candidateQuestions', data);
@@ -28,11 +31,69 @@ module.exports = (app, watson) => {
   // start resume upload
   app.get('/candidate/upload', (req, res)=>{
     const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
-    res.render('candidateQuestions', data);
+    res.render('candidateUpload', data);
   });
+  const async = require('async');
+  const fs = require('fs');
+  const i18n  = require('i18next');
+  let PDFParser = require("pdf2json");
+
+  let pdfParser = new PDFParser(this,1);
   // start resume upload handler
-  app.get('/candidate/upload/handler', (req, res)=>{
+  app.post('/candidate/upload/handler', upload.single('resume'),(req, res, next)=>{
+    handyUtils.debug('pdf file',req.file);
     const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
+    var resumeCandidate = '';
+    async.series([
+      // handle pdf upload
+    (next) => {
+      console.log('first serie');
+      next();
+     },
+     // parse pdf file
+    (next) => {
+      pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError) );
+      pdfParser.on("pdfParser_dataReady", pdfData => {
+          fs.writeFile("./testingPDF/resume.content.txt", pdfParser.getRawTextContent());
+      });
+
+      pdfParser.loadPDF("../uploads/"+req.file.filename);
+
+      fs.readFile("./testingPDF/resume.content.txt", 'utf8', function(err, data) {
+        if (err) throw err;
+        console.log('OK: parsed');
+        resumeCandidate = data;
+        console.log('checking ----------__@_@#_$#_#___');
+        console.log(resumeCandidate);
+        next();
+      });
+    },
+    (next) =>{
+      // Create the service wrapper
+      var personality_insights = watson.personality_insights({
+        version: 'v2',
+        username: '5e53bade-d01f-4beb-bcf6-de1dbf8186f8',
+        password: '4YwXuTIuUqmu'
+      });
+
+      var params = {
+        // Get the content items from the JSON file.
+        text: resumeCandidate,
+        consumption_preferences: true,
+        raw_scores: true,
+        headers: {
+          'accept-language': 'en',
+          'accept': 'application/json'
+        }
+      };
+      personality_insights.profile(params, function(error, response) {
+        if (error)
+          console.log('error:', error);
+        else
+          console.log(JSON.stringify(response, null, 2));
+      });
+    }
+   ]);
     res.redirect('/');
   });
   // final stage in candidate journey
@@ -76,21 +137,20 @@ module.exports = (app, watson) => {
     // Add user input to data for personality test
     if ( payload['input']['text'] !== undefined ) {
       app.locals.dataForPersonalityTest += payload['input']['text'] + '. ';
-      app.locals.inputWordsCount += payload['input']['text'].split(' ').length;
+      app.locals.inputWordsCount += payload.input.text.split(' ').length;
     }
 
     // Send the input to the conversation service
     conversation.message( payload, function(err, data) {
+      handyUtils.debug('user input',payload.input.text);
       if ( err ) {
         return res.status( err.code || 500 ).json( err );
       }
-      if ( app.locals.textoSalidaEncontrado ) {
-        console.log('askdj');
-        return;
-      } else {
+      else {
+        console.log('el usuario no ha aceptado');
         return res.json( updateMessage( payload, data ) );
       }
-    } );
+    });
     /**
      * Updates the response text using the intent confidence
      * @param  {Object} input The request to the Conversation service
@@ -103,8 +163,7 @@ module.exports = (app, watson) => {
       for (i = 0; i < response['output']['text'].length; i++) {
         if ( response['output']['text'][i] == 'mandarhojadevida941') {
           app.locals.textoSalidaEncontrado = true;
-          console.log('ENTRO');
-          return res.redirect('/');
+
         }
       }
 
