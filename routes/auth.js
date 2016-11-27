@@ -3,7 +3,7 @@ module.exports = (app, privateKey, publicKey) => {
   const jwt = require('jsonwebtoken');
   const userAccount = require('../models/account');
   app.get('/', (req, res) =>{
-    const dataForView = {title:'Inicio', layout:'main', message: req.flash()};
+    const dataForView = {title:'Inicio', layout:'homepage', message: req.flash()};
     res.render('home',dataForView);
   });
   // Check cookie function
