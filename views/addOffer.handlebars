@@ -1,28 +1,44 @@
-<h1>Agregar oferta</h1>
-<form action="/employer/registerOffer" method="post">
-  <p>
-    Cargo
-    <input type="text" name="offerName" placeholder="Programador">
-  </p>
-  <p>
-    Competencias
-    <input type="text" name="competencies" placeholder="Python, Java, HTML">
-  </p>
-  <p>
-    Experiencia (Años)
-    <input type="number" name="minExperience" placeholder="Experiencia mínima">
-    <input type="number" name="maxExperience" placeholder="Experiencia máxima">
-  </p>
-  <p>
-    Salario
-    <input type="number" name="salary" placeholder="Salario">
-  </p>
-  <p>
-    Certificados
-    <input type="text" name="certificates" placeholder="Certificado en seguridad informática, Apple teacher certified">
-  </p>
-  <p>
-    <button type="submit" name="button">Registrarse</button>
-  </p>
-</form>
-<p>info sobre beneficios de la aplicacion.</p>
+<div class="col-lg-6 col-lg-offset-3 well bs-component">
+  <form class="form-horizontal" method="POST" action="/employer/registerOffer">
+    <fieldset>
+      <legend>Agregar oferta</legend>
+      <div class="form-group">
+        <label for="offerName" class="col-lg-2 control-label">Cargo</label>
+        <div class="col-lg-10">
+          <input type="text" name="offerName" class="form-control" id="offerName" placeholder="Programador">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="competencies" class="col-lg-2 control-label">Competencias</label>
+        <div class="col-lg-10">
+          <input type="text" name="competencies" class="form-control" id="competencies" placeholder="Python, Java, HTML">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="minExperience" class="col-lg-2 control-label">Experiencia</label>
+        <div class="col-lg-10">
+          <input type="number" name="minExperience" class="form-control" id="minExperience" placeholder="Experiencia mínima">
+          <input type="number" name="maxExperience" class="form-control" id="maxExperience" placeholder="Experiencia máxima">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="salary" class="col-lg-2 control-label">Salario</label>
+        <div class="col-lg-10">
+          <input type="number" name="salary" class="form-control" id="salary" placeholder="Salario">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="certificates" class="col-lg-2 control-label">Certificados</label>
+        <div class="col-lg-10">
+          <input type="text" name="certificates" class="form-control" id="certificates" placeholder="Python, Java, HTML">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button type="reset" class="btn btn-default">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Publicar</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

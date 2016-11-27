@@ -11,24 +11,63 @@
   <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
 </head>
   <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">laboEspacio</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/employer">Empleador</a></li>
+            <li><a href="/candidate">Candidato</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <div class="container">
     <!-- Error Messages -->
   {{#if message.error}}
-  <div class="message error">
-    {{message.error}}(X)
+  <div class="message error alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{message.error}}
   </div>
   {{/if}}
   <!-- Success messages -->
   {{#if message.success}}
-  <div class="message success">
-    {{message.success}}(X)
+  <div class="message success alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{message.success}}
   </div>
   {{/if}}
-{{{body}}}
+    <br>
+    <div class="row">
+      {{{body}}}
+    </div>
+  </div>
 <footer>
   <a href="/faq">FAQ</a>
   <a href="/about">Acerca</a>
   <a href="/contact">Contacto</a>
 </footer>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
   </body>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js"></script>
