@@ -1,21 +1,33 @@
-<h1>dashboard</h1>
+
+<a href="/employer/addOffer" class="btn btn-success">+ Agregar oferta</a>
 <h2>Ofertas posteadas:</h2>
-<a href="/employer/addOffer"><h2>Agregar oferta</h2></a>
-
-<a href="/logout">Cerrar Sesión</a>
-
+<div class="row">
 {{#each offerList}}
-  <div class="">
-    <p> {{this.offerName}}</p>
-    {{#each this.competencies}}
-      <span>{{this}}</span>
-    {{/each}}
-    <p>min exp: {{this.minExperience}}</p>
-    <p>max exp: {{this.maxExperience}}</p>
-    <p>salary: {{this.salary}}</p>
-    <p>certificados:</p>
-    {{#each this.certificates}}
-      <span>{{this}}</span>
-    {{/each}}
+<div class="col-lg-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{this.offerName}}</h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li>Competencias:</li>
+        <ul>
+          {{#each this.competencies}}
+            <li>{{this}}</li>
+          {{/each}}
+        </ul>
+        <li>min exp: <strong>{{this.minExperience}}</strong>  | max exp: <strong>{{this.maxExperience}}</strong> </li>
+        <li>Salario: {{this.salary}}</li>
+        <li>Certificados:</li>
+          <ul>
+            {{#each this.certificates}}
+            <li>{{this}}</li>
+          </ul>
+        {{/each}}
+      </ul>
+    </div>
+
   </div>
+</div>
 {{/each}}
+</div>

@@ -1,19 +1,27 @@
-<h1>Sign Up</h1>
-<form action="/verify/signup" method="post">
-  <p>
-    <input type="text" name="captcha" placeholder="50 + 50">
-  </p>
-  <p>
-    <input type="text" name="companyName" placeholder="Nombre de la Compañia">
-  </p>
-  <p>
-    <input type="email" name="email" placeholder="Correo Electrónico">
-  </p>
-  <p>
-    <input type="password" name="password" placeholder="Contraseña">
-  </p>
-  <p>
-    <button type="submit" name="button">Registrarse</button>
-  </p>
-</form>
-<p>info sobre beneficios de la aplicacion.</p>
+
+<div class="col-lg-6 col-lg-offset-3 well bs-component">
+
+  <form class="form-horizontal" action="/verify/signup" method="post">
+    <fieldset>
+      <legend>Regístrate</legend>
+      <p>
+        <input type="text" name="captcha" placeholder="50 + 50">
+      </p>
+      <p>
+        <input type="text" name="companyName" placeholder="Nombre de la Compañia">
+      </p>
+      <p>
+        <input type="email" name="email" placeholder="Correo Electrónico">
+      </p>
+      <p>
+        <input type="password" name="password" placeholder="Contraseña">
+      </p>
+      <br>
+      <p>
+        <button type="submit" name="button" class="btn btn-primary">Registrarse</button>
+        <a href="/signin" class="btn btn-success">Ya tengo una cuenta</a>
+      </p>
+    </fieldset>
+  </form>
+
+</div>

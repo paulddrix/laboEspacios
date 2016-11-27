@@ -1,13 +1,17 @@
-<h1>Sign In</h1>
-<form action="/verify/signin" method="post">
-  <p>
-    <input type="email" name="email" placeholder="Correo Electrónico">
-  </p>
-  <p>
-    <input type="password" name="password" placeholder="Contraseña">
-  </p>
-  <p>
-    <button type="submit">Iniciar Secion</button>
-  </p>
-</form>
-<p>info sobre beneficios de la aplicacion.</p>
+<div class="col-lg-6 col-lg-offset-3 well bs-component">
+  <form class="form-horizontal" action="/verify/signin" method="post">
+    <fieldset>
+      <legend>Login</legend>
+        <p>
+          <input type="email" name="email" placeholder="Correo Electrónico">
+        </p>
+        <p>
+          <input type="password" name="password" placeholder="Contraseña">
+        </p>
+        <br>
+        <p>
+          <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        </p>
+    </fieldset>
+  </form>
+</div>
