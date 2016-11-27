@@ -13,6 +13,7 @@ require('./config/express')(app);
 const publicKey = fs.readFileSync('./keys/public.pub');
 // Private Key
 const privateKey = fs.readFileSync('./keys/private.pem');
+
 // routes
 require('./routes/routes')(app, watson,privateKey, publicKey);
 
@@ -21,6 +22,7 @@ require('./config/error-handler')(app);
 
 // Stores all user inputs
 app.locals.dataForPersonalityTest = "";
+app.locals.inputWordsCount = 0;
 
 var port = process.env.VCAP_APP_PORT || 3000;
 app.listen(port);

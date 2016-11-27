@@ -9,6 +9,9 @@ module.exports = (app, watson) => {
   // Replace with the context obtained from the initial request
   var context = {};
 
+  // Exit condition for candidate
+  var palabrasCompletas = false;
+
   app.get('/candidate', (req, res)=>{
     const data = {'title':'ChaTitulo','layout':'candidateChat', 'candidate':'pedro'};
     res.render('candidateChatBody', data);
@@ -45,7 +48,17 @@ module.exports = (app, watson) => {
     // Add user input to data for personality test
     if ( payload['input']['text'] !== undefined ) {
       app.locals.dataForPersonalityTest += payload['input']['text'] + '. ';
+      app.locals.inputWordsCount += payload['input']['text'].split(' ').length;
       console.log(app.locals.dataForPersonalityTest);
+    }
+
+    // Add user input to data for personality test
+    if ( payload['input']['text'] == "1200" || app.locals.inputWordsCount >= 1200 ) {
+      palabrasCompletas = true;
+    }
+
+    if( palabrasCompletas ) {
+      payload['input']['text'] = "salidachat#salgase";
     }
 
     // Send the input to the conversation service
@@ -55,6 +68,7 @@ module.exports = (app, watson) => {
       }
       return res.json( updateMessage( payload, data ) );
     } );
+
   } );
 
   /**
