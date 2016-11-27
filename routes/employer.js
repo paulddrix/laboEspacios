@@ -1,18 +1,31 @@
 module.exports = (app) => {
-  const i18n  = require('i18next');
-  app.get('/employer', function(req, res) {
+  const handyUtils = require('handyutils');
+  /*
+  * EMPLOYER
+  */
+  app.get('/signup', function(req, res) {
     const dataForView = {title:"Empleador", layout:"employer"};
-    res.render('home', dataForView);
+    res.render('signup', dataForView);
+  });
+  /*
+  * EMPLOYER
+  */
+  app.get('/signin', function(req, res) {
+    const dataForView = {title:"Empleador", layout:"employer"};
+    res.render('signin', dataForView);
+  });
+  /*
+  * EMPLOYER > HANDLER
+  */
+  app.post('/signup/handler', function(req, res) {
+    handyUtils.debug('req at /employer/signup/handler', req);
+    req.flash('error', errorMessage);
+    res.redirect('');
+  });
+  app.get('/employer/dashboard', (req, res)=>{
+    const dataForView = {title:"Empleador", layout:"employer"};
+    res.render('dashboard', dataForView);
   });
 
-  app.post('/api/profile', function(req, res, next) {
-    var parameters = extend(req.body, { acceptLanguage : i18n.lng() });
 
-    personalityInsights.profile(parameters, function(err, profile) {
-      if (err)
-        return next(err);
-      else
-        return res.json(profile);
-    });
-  });
 }

@@ -8,7 +8,6 @@ require('./config/i18n')(app);
 
 // Bootstrap application settings
 require('./config/express')(app);
-
 // =-=-=-=-=-=-=-=-=-= Keys =-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Public key
 const publicKey = fs.readFileSync('./keys/public.pub');
