@@ -91,15 +91,19 @@ module.exports = (app, watson) => {
           console.log('error:', error);
         else
           console.log(JSON.stringify(response, null, 2));
+          let personalityInsightsRes = JSON.stringify(response, null, 2);
+          console.log('parsing json!!!!');
+          console.log(response.tree.children[0].children[0].children[1].children[5]);
+
       });
     }
    ]);
-    res.redirect('/');
+    res.redirect('/candidate/offers');
   });
   // final stage in candidate journey
   app.get('/candidate/offers', (req, res)=>{
-    const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
-    res.render('candidateOffers', data);
+    const dataForView = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
+    res.render('candidateOffers', dataForView);
   });
   // final stage in candidate journey
   app.get('/candidate/report', (req, res)=>{
