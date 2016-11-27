@@ -10,6 +10,18 @@
   <link rel="stylesheet" href="/css/main.css">
 </head>
   <body>
+    <!-- Error Messages -->
+  {{#if message.error}}
+  <div class="message error">
+    {{message.error}}(X)
+  </div>
+  {{/if}}
+  <!-- Success messages -->
+  {{#if message.success}}
+  <div class="message success">
+    {{message.success}}(X)
+  </div>
+  {{/if}}
     <nav>
       <a href="/">Inicio</a>
       <a href="/candidate">Candidato</a>

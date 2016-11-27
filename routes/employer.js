@@ -4,18 +4,18 @@ module.exports = (app) => {
   * EMPLOYER
   */
   app.get('/signup', function(req, res) {
-    const dataForView = {title:"Empleador", layout:"employer"};
+    const dataForView = {title:"Empleador", layout:"employer", message: req.flash()};
     res.render('signup', dataForView);
   });
   /*
   * EMPLOYER
   */
   app.get('/signin', function(req, res) {
-    const dataForView = {title:"Empleador", layout:"employer"};
+    const dataForView = {title:"Empleador", layout:"employer", message: req.flash()};
     res.render('signin', dataForView);
   });
   app.get('/employer/dashboard', (req, res)=>{
-    const dataForView = {title:"Empleador", layout:"employer"};
+    const dataForView = {title:"Empleador", layout:"employer", message: req.flash()};
     res.render('dashboard', dataForView);
   });
 

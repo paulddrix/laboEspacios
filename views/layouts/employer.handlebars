@@ -13,6 +13,18 @@
   <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
 </head>
   <body>
+    <!-- Error Messages -->
+  {{#if message.error}}
+  <div class="message error">
+    {{message.error}}(X)
+  </div>
+  {{/if}}
+  <!-- Success messages -->
+  {{#if message.success}}
+  <div class="message success">
+    {{message.success}}(X)
+  </div>
+  {{/if}} 
 {{{body}}}
 <footer>
   <a href="/faq">FAQ</a>

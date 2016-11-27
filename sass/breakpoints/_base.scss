@@ -6,7 +6,6 @@ Stylesheet: Base Stylesheet
 \*------------------------------------*/
 html,body{
   height: 100%;
-  background-color:green; 
 }
 body {
   font-family:$base-font-family;
@@ -18,4 +17,13 @@ body {
 h1,h2,h3,h4,h5{
   font-family: 'Verdana', Geneva, san-serif;
 	font-weight: initial;
+}
+.message{
+  color:blue;
+}
+.success{
+  color: green;
+}
+.error{
+  color: red;
 }
