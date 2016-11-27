@@ -1,5 +1,4 @@
 module.exports = (app, watson) => {
-  require('./candidate')(app);
+  require('./candidate')(app, watson);
   require('./employer')(app);
-  require('./test')(app, watson);
 }
