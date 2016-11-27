@@ -53,55 +53,61 @@ module.exports = (app, watson) => {
 
     // Send the input to the conversation service
     conversation.message( payload, function(err, data) {
-
       if ( err ) {
         return res.status( err.code || 500 ).json( err );
       }
-      return res.json( updateMessage( payload, data ) );
-    } );
-
-  } );
-
-  /**
-   * Updates the response text using the intent confidence
-   * @param  {Object} input The request to the Conversation service
-   * @param  {Object} response The response from the Conversation service
-   * @return {Object}          The response with the updated message
-   */
-  function updateMessage(input, response) {
-    //console.log(response['output']['text'].find("mandarhojadevida941"));
-
-    for (i = 0; i < response['output']['text'].length; i++) {
-      if ( response['output']['text'][i] == 'mandarhojadevida941') {
-        app.locals.textoSalidaEncontrado = true;
+      if ( app.locals.textoSalidaEncontrado ) {
+        console.log('askdj');
+        return;
+      } else {
+        return res.json( updateMessage( payload, data ) );
       }
-    }
+    } );
+    /**
+     * Updates the response text using the intent confidence
+     * @param  {Object} input The request to the Conversation service
+     * @param  {Object} response The response from the Conversation service
+     * @return {Object}          The response with the updated message
+     */
+    function updateMessage(input, response) {
+      //console.log(response['output']['text'].find("mandarhojadevida941"));
 
-    var responseText = null;
-    var id = null;
-    if ( !response.output ) {
-      response.output = {};
-    } else {
+      for (i = 0; i < response['output']['text'].length; i++) {
+        if ( response['output']['text'][i] == 'mandarhojadevida941') {
+          app.locals.textoSalidaEncontrado = true;
+          console.log('ENTRO');
+          return res.redirect('/');
+        }
+      }
+
+      var responseText = null;
+      var id = null;
+      if ( !response.output ) {
+        response.output = {};
+      } else {
+        return response;
+      }
+      if ( response.intents && response.intents[0] ) {
+        var intent = response.intents[0];
+        // Depending on the confidence of the response the app can return different messages.
+        // The confidence will vary depending on how well the system is trained. The service will always try to assign
+        // a class/intent to the input. If the confidence is low, then it suggests the service is unsure of the
+        // user's intent . In these cases it is usually best to return a disambiguation message
+        // ('I did not understand your intent, please rephrase your question', etc..)
+        if ( intent.confidence >= 0.75 ) {
+          responseText = 'I understood your intent was ' + intent.intent;
+        } else if ( intent.confidence >= 0.5 ) {
+          responseText = 'I think your intent was ' + intent.intent;
+        } else {
+          responseText = 'I did not understand your intent';
+        }
+      }
+      response.output.text = responseText;
       return response;
     }
-    if ( response.intents && response.intents[0] ) {
-      var intent = response.intents[0];
-      // Depending on the confidence of the response the app can return different messages.
-      // The confidence will vary depending on how well the system is trained. The service will always try to assign
-      // a class/intent to the input. If the confidence is low, then it suggests the service is unsure of the
-      // user's intent . In these cases it is usually best to return a disambiguation message
-      // ('I did not understand your intent, please rephrase your question', etc..)
-      if ( intent.confidence >= 0.75 ) {
-        responseText = 'I understood your intent was ' + intent.intent;
-      } else if ( intent.confidence >= 0.5 ) {
-        responseText = 'I think your intent was ' + intent.intent;
-      } else {
-        responseText = 'I did not understand your intent';
-      }
-    }
-    response.output.text = responseText;
-    return response;
-  }
+  } );
+
+
 
     //
     // // Endpoint which allows deletion of db
