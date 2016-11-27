@@ -144,7 +144,7 @@ module.exports = (app, privateKey, publicKey) => {
   */
   app.get('/logout', (req, res) => {
     res.cookie('authorization', 'logged-out');
-    const successMessage = 'Successfully logged out.';
+    const successMessage = 'Haz cerrado sesión on exito.';
     req.flash('success', successMessage);
     res.redirect('/');
   });

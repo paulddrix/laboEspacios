@@ -14,7 +14,7 @@ exports.create = (user, callback) => {
   // Use connect method to connect to the DB Server
   MongoClient.connect(process.env.MONGODB_URI, (err, db) => {
     // Get the documents collection
-    const collection = db.collection('users');
+    const collection = db.collection('jobOffers');
     // Find some documents
     collection.insertOne(user, (createErr, createResult) => {
       // Parsing mongoDoc
@@ -40,7 +40,7 @@ exports.find = (query, callback) => {
   // Use connect method to connect to the DB Server
   MongoClient.connect(process.env.MONGODB_URI, (err, db) => {
     // Get the documents collection
-    const collection = db.collection('users');
+    const collection = db.collection('jobOffers');
     // Find some documents
     collection.find(query).toArray((findErr, accountInfo) => {
       // Parsing mongoDoc
@@ -63,7 +63,7 @@ exports.update = (query, updateInfo, callback) => {
   // Use connect method to connect to the DB Server
   MongoClient.connect(process.env.MONGODB_URI, (err, db) => {
     // Get the documents collection
-    const collection = db.collection('users');
+    const collection = db.collection('jobOffers');
     // update user
     collection.update(query, {
       $set: updateInfo,
@@ -88,7 +88,7 @@ exports.destroy = (user, callback) => {
   // Use connect method to connect to the DB Server
   MongoClient.connect(process.env.MONGODB_URI, (err, db) => {
     // Get the documents collection
-    const collection = db.collection('users');
+    const collection = db.collection('jobOffers');
     // Find some documents
     collection.remove(user, (removeErr, removeResult) => {
       // Parsing mongoDoc

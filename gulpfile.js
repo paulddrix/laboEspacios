@@ -20,6 +20,9 @@ gulp.task('mongod', () => { 
 });
 // Create keys and store them in the right folder
 gulp.task('genRSAKeys', () => { 
+	exec('mkdir ./keys', (err,stdout,stderr) => {
+		console.log(stdout);
+	});
 	exec('openssl genrsa -out ./keys/private.pem 1024 && openssl rsa -in ./keys/private.pem -pubout > ./keys/public.pub', function(err,stdout,stderr){
     console.log(stdout);
   });
