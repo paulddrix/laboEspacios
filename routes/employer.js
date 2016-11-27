@@ -48,11 +48,8 @@ module.exports = (app) => {
       salary:req.body.salary,
       certificates:arrayCertificates
     };
-    console.log('antes');
-    console.log(JSONFinalEmployer);
     handyUtils.debug('json /employer/addOffer/handler', JSONFinalEmployer);
     job.create(JSONFinalEmployer,(error,result)=>{
-      console.log("llega");
       console.log(result);
       console.log(error);
       const successMessage = 'La oferta de empleo ha sido creada on exito.';
