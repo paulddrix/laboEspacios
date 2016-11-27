@@ -19,6 +19,9 @@ require('./routes/routes')(app, watson,privateKey, publicKey);
 // error-handler settings
 require('./config/error-handler')(app);
 
+// Stores all user inputs
+app.locals.dataForPersonalityTest = "";
+
 var port = process.env.VCAP_APP_PORT || 3000;
 app.listen(port);
 console.log('listening at:', port);
