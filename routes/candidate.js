@@ -49,20 +49,11 @@ module.exports = (app, watson) => {
     if ( payload['input']['text'] !== undefined ) {
       app.locals.dataForPersonalityTest += payload['input']['text'] + '. ';
       app.locals.inputWordsCount += payload['input']['text'].split(' ').length;
-      console.log(app.locals.dataForPersonalityTest);
-    }
-
-    // Add user input to data for personality test
-    if ( payload['input']['text'] == "1200" || app.locals.inputWordsCount >= 1200 ) {
-      palabrasCompletas = true;
-    }
-
-    if( palabrasCompletas ) {
-      payload['input']['text'] = "salidachat#salgase";
     }
 
     // Send the input to the conversation service
     conversation.message( payload, function(err, data) {
+
       if ( err ) {
         return res.status( err.code || 500 ).json( err );
       }
@@ -78,6 +69,14 @@ module.exports = (app, watson) => {
    * @return {Object}          The response with the updated message
    */
   function updateMessage(input, response) {
+    //console.log(response['output']['text'].find("mandarhojadevida941"));
+
+    for (i = 0; i < response['output']['text'].length; i++) {
+      if ( response['output']['text'][i] == 'mandarhojadevida941') {
+        app.locals.textoSalidaEncontrado = true;
+      }
+    }
+
     var responseText = null;
     var id = null;
     if ( !response.output ) {
@@ -101,7 +100,6 @@ module.exports = (app, watson) => {
       }
     }
     response.output.text = responseText;
-
     return response;
   }
 

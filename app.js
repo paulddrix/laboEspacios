@@ -23,6 +23,8 @@ require('./config/error-handler')(app);
 // Stores all user inputs
 app.locals.dataForPersonalityTest = "";
 app.locals.inputWordsCount = 0;
+app.locals.textoSalidaEncontrado = false;
+
 
 var port = process.env.VCAP_APP_PORT || 3000;
 app.listen(port);
