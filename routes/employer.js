@@ -21,7 +21,11 @@ module.exports = (app) => {
 
   app.get('/employer/addOffer', (req, res)=>{
     const dataForView = {title:"Agregar Oferta", layout:"employer", message: req.flash()};
-    res.render('dashboard', dataForView);
+    res.render('addOffer', dataForView);
+  });
+
+  app.post('/employer/registerOffer', (req, res) => {
+    
   });
 
 }

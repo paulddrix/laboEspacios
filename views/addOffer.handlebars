@@ -1,16 +1,25 @@
 <h1>Agregar oferta</h1>
-<form action="/verify/signup" method="post">
+<form action="/employer/registerOffer" method="post">
   <p>
-    <input type="text" name="captcha" placeholder="50 + 50">
+    Cargo
+    <input type="text" name="offerName" placeholder="Programador">
   </p>
   <p>
-    <input type="text" name="companyName" placeholder="Nombre de la Compañia">
+    Competencias
+    <input type="text" name="competencies" placeholder="Python, Java, HTML">
   </p>
   <p>
-    <input type="email" name="email" placeholder="Correo Electrónico">
+    Experiencia (Años)
+    <input type="number" name="minExperience" placeholder="Experiencia mínima">
+    <input type="number" name="maxExperience" placeholder="Experiencia máxima">
   </p>
   <p>
-    <input type="password" name="password" placeholder="Contraseña">
+    Salario
+    <input type="number" name="salary" placeholder="Salario">
+  </p>
+  <p>
+    Certificados
+    <input type="text" name="certificates" placeholder="Certificado en seguridad informática, Apple teacher certified">
   </p>
   <p>
     <button type="submit" name="button">Registrarse</button>
