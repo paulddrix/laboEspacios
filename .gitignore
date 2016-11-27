@@ -39,3 +39,5 @@ jspm_packages
 # keys
 /keys/private.pem
 /keys/public.pub
+#env
+.env
