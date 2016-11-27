@@ -117,6 +117,7 @@ module.exports = (app, privateKey, publicKey) => {
         // decrypt password and store it
         // verify a token asymmetric
         jwt.verify(result[0].password, publicKey, (decodedErr, decodedToken) => {
+          handyUtils.debug('decodedErr at /verify/signin', decodedErr);
           handyUtils.debug('decodedToken at /verify/signin', decodedToken);
           if (req.body.password === decodedToken.password) {
             handyUtils.debug('contrast pass at /verify/signin', decodedToken);

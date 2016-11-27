@@ -8,17 +8,45 @@ module.exports = (app, watson) => {
   });
   // Replace with the context obtained from the initial request
   var context = {};
-
   // Exit condition for candidate
   var palabrasCompletas = false;
-
-  app.get('/candidate', (req, res)=>{
-    const data = {'title':'ChaTitulo','layout':'candidateChat', 'candidate':'pedro'};
+  // start candidate journey
+  app.get('/candidate/index', (req, res)=>{
+    const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
+    res.render('candidateIndex', data);
+  });
+  // start candidate chat
+  app.get('/candidate/chat', (req, res)=>{
+    const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
     res.render('candidateChatBody', data);
   });
-
+  // start questions 
+  app.get('/candidate/questions', (req, res)=>{
+    const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
+    res.render('candidateQuestions', data);
+  });
+  // start resume upload
+  app.get('/candidate/upload', (req, res)=>{
+    const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
+    res.render('candidateQuestions', data);
+  });
+  // start resume upload handler
+  app.get('/candidate/upload/handler', (req, res)=>{
+    const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
+    res.redirect('/');
+  });
+  // final stage in candidate journey
+  app.get('/candidate/offers', (req, res)=>{
+    const data = {'title':'ChaTitulo','layout':'candidateChat', message:req.flash()};
+    res.render('candidateOffers', data);
+  });
+  // final stage in candidate journey
+  app.get('/candidate/report', (req, res)=>{
+    const data = {'title':'ChaTitulo','layout':'candidateChat', 'candidate':'pedro'};
+    res.render('candidateReport', data);
+  });
   // Endpoint to be call from the client side
-  app.post( '/api/message', function(req, res) {
+  app.post('/api/message', function(req, res) {
     var workspace = process.env.WORKSPACE_ID || 'e31d19f8-8401-4a2f-87a9-42618c14d017';
     if ( !workspace || workspace === '<workspace-id>' ) {
       return res.json( {

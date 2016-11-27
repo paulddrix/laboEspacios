@@ -1,5 +1,5 @@
 <div class="col-lg-6 col-lg-offset-3 well bs-component">
-  <form class="form-horizontal" method="POST" action="/employer/registerOffer">
+  <form class="form-horizontal" method="POST" action="/employer/addOffer/handler">
     <fieldset>
       <legend>Agregar oferta</legend>
       <div class="form-group">
@@ -38,6 +38,7 @@
           <button type="reset" class="btn btn-default">Cancelar</button>
           <button type="submit" class="btn btn-primary">Publicar</button>
         </div>
+        <input type="hidden" name="companyId" value="{{companyId}}">
       </div>
     </fieldset>
   </form>

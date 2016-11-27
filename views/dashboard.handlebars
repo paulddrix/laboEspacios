@@ -3,3 +3,19 @@
 <a href="/employer/addOffer"><h2>Agregar oferta</h2></a>
 
 <a href="/logout">Cerrar Sesión</a>
+
+{{#each offerList}}
+  <div class="">
+    <p> {{this.offerName}}</p>
+    {{#each this.competencies}}
+      <span>this</span>
+    {{/each}}
+    <p>min exp: {{this.minExperience}}</p>
+    <p>max exp: {{this.maxExperience}}</p>
+    <p>salary: {{this.salary}}</p>
+    <p>certificados:</p>
+    {{#each this.certificates}}
+      <span>this</span>
+    {{/each}}
+  </div>
+{{/each}}
