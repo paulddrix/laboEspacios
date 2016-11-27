@@ -9,9 +9,6 @@ module.exports = (app, watson) => {
   // Replace with the context obtained from the initial request
   var context = {};
 
-  // Stores all user inputs
-  var dataForPersonalityTest = "";
-
   app.get('/candidate', (req, res)=>{
     const data = {'title':'ChaTitulo','layout':'candidateChat', 'candidate':'pedro'};
     res.render('candidateChatBody', data);
@@ -44,6 +41,13 @@ module.exports = (app, watson) => {
         payload.context = req.body.context;
       }
     }
+
+    // Add user input to data for personality test
+    if ( payload['input']['text'] !== undefined ) {
+      app.locals.dataForPersonalityTest += payload['input']['text'] + '. ';
+      console.log(app.locals.dataForPersonalityTest);
+    }
+
     // Send the input to the conversation service
     conversation.message( payload, function(err, data) {
       if ( err ) {
@@ -65,7 +69,6 @@ module.exports = (app, watson) => {
     if ( !response.output ) {
       response.output = {};
     } else {
-
       return response;
     }
     if ( response.intents && response.intents[0] ) {
