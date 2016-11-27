@@ -25,8 +25,13 @@ gulp.task('genRSAKeys', () => { 
   });
 });
 gulp.task('envFile', () => { 
-	exec('echo \"DEBUG=True\" \"MONGODB_URI=mongodb://admin:WALBWWZERVWLMHRR@sl-us-dal-9-portal.3.dblayer.com:17156,sl-us-dal-9-portal.4.dblayer.com:17156/admin?ssl=true\"
-	\"WORKSPACE_ID=e31d19f8-8401-4a2f-87a9-42618c14d017\"> ./.env', (err,stdout,stderr) => {
+	exec('echo \"DEBUG=True\" > ./.env', (err,stdout,stderr) => {
+    console.log(stdout);
+  });
+	exec('echo \"MONGODB_URI=mongodb://admin:WALBWWZERVWLMHRR@sl-us-dal-9-portal.3.dblayer.com:17156,sl-us-dal-9-portal.4.dblayer.com:17156/admin?ssl=true\" >> ./.env', (err,stdout,stderr) => {
+    console.log(stdout);
+  });
+	exec('echo \"WORKSPACE_ID=e31d19f8-8401-4a2f-87a9-42618c14d017\" >> ./.env', (err,stdout,stderr) => {
     console.log(stdout);
   });
 });
